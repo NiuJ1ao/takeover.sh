@@ -44,6 +44,11 @@ root filesystem on `/mnt` without any other filesystems that are mounted on top.
 You need to decide on what rescue environment you want. I recommend
 [SystemRescueCD](https://www.system-rescue-cd.org/), which comes with many
 useful tools (you have to loopmount the ISO and then use `unsquashfs`).
+1. Install systemrescue-x.y.z.iso file from website.
+2. Loopmount the ISO: `sudo mount -o loop <path to systemrescue-x.y.z.iso> /mnt/iso`.
+3. Loopmount the squashed filesystem: `sudo mount -t squashfs -o loop /mnt/iso/sysresccd/x86_64/airootfs.sfs /mnt/airootfs`.
+4. Copy to the unsquashed fs to `/takeover`: `sudo cp -a /mnt/airootfs/. /takeover/`.
+
 Obviously, whatever you pick has to fit into free RAM, with room to spare. If
 your chosen rescue environment has `/lib/modules`, you may want to get rid of
 it to save space, as its kernel modules won't be useful on the host kernel
